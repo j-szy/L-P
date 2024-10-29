@@ -35,46 +35,6 @@
                 <input type="submit" value="Generate" class="submit-button">
             </form>
 
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Get input values
-                $date = $_POST['date'];
-                $start_time = $_POST['start_time'];
-                $end_time = $_POST['end_time'];
-                $quantity = $_POST['quantity'];
-
-                // Convert times to DateTime objects for comparison
-                $start = new DateTime($start_time);
-                $end = new DateTime($end_time);
-                $interval = $start->diff($end);
-
-                // Check if the time difference is within 2 hours
-                if ($interval->h < 2 || ($interval->h == 2 && $interval->i == 0)) {
-                    echo "<p class='success'>Booking successful for $date from $start_time to $end_time.</p>";
-                    
-                    // Validate the input quantity for usernames and passwords
-                    if ($quantity >= 1 && $quantity <= 30) {
-                        echo "<p class='success'>Generating $quantity usernames and passwords:</p>";
-                        echo "<ul>";
-
-                        // Generate usernames and passwords
-                        for ($i = 0; $i < $quantity; $i++) {
-                            $username = "user" . rand(1000, 9999);  // Random username
-                            $password = bin2hex(random_bytes(4));  // 8-character random password
-
-                            echo "<li>Username: $username | Password: $password</li>";
-                        }
-
-                        echo "</ul>";
-                    } else {
-                        echo "<p class='error'>Error: Please select a number between 1 and 30 for usernames and passwords.</p>";
-                    }
-                } else {
-                    echo "<p class='error'>Error: The time window should be up to 2 hours.</p>";
-
-                }
-            }
-            ?>
 								                <br><a href="index.php">Return</a>
 
         </main>
