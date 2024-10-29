@@ -23,25 +23,7 @@
                 
                 <input type="submit" value="Book" class="submit-button">
             </form>
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $date = $_POST['date'];
-                $start_time = $_POST['start_time'];
-                $end_time = $_POST['end_time'];
-
-                // Convert times to datetime objects for comparison
-                $start = new DateTime($start_time);
-                $end = new DateTime($end_time);
-                $interval = $start->diff($end);
-
-                // Check if the time difference is within 2 hours
-                if ($interval->h < 2 || ($interval->h == 2 && $interval->i == 0)) {
-                    echo "<p class='success'>Booking successful for $date from $start_time to $end_time.</p>";
-                } else {
-                    echo "<p class='error'>Error: The time window should be up to 2 hours.</p>";
-                }
-            }
-            ?>
+            
 			<br><a href="index.php">Return</a>
         </main>
     </div>
